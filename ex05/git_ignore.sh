@@ -1,2 +1,2 @@
 #!/bin/sh
-git check-ignore $(ls)
+git check-ignore $(ls -A)
