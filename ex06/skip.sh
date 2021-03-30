@@ -1,1 +1,1 @@
-ls -l | awk 'BEGIN { C = 1 } { if (C % 2) print $0; C = C + 1 }'
+ls -l | sed -n "1~2p"
