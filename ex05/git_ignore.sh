@@ -1,2 +1,2 @@
 #!/bin/sh
-git check-ignore $(ls -A)
+git check-ignore $(find -type f | sed -e "s:./::")
