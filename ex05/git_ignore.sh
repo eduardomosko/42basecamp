@@ -1,2 +1,2 @@
 #!/bin/sh
-git check-ignore $(find -type f | sed -e "s:\./::")
+git status --ignored -s | sed -e "/!!/!d" -e "s/!! //"
