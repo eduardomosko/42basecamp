@@ -1,2 +1,2 @@
 #!/bin/sh
-ifconfig | sed -e "/ether/!d" -e "s:^\s*ether ::"
+ifconfig | grep ether | awk '{ print $2 }'
