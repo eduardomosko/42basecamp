@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 16:10:27 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/01 16:41:12 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/01 21:48:31 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_sort_int_tab(int *tab, int size)
 		{
 			if (tab[i - 1] > tab[i])
 			{
-				temp = tab[i - 1];
+				temp = tab[i];
 				tab[i] = tab[i - 1];
 				tab[i - 1] = temp;
 			}
