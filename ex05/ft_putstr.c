@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 15:10:27 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/01 15:11:56 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/01 15:14:27 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_putstr(char *str)
 {
 	int n;
 
+	n = 0;
 	while (str[n] != '\0')
 		++n;
 	write(1, str, n);
