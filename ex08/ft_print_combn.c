@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 00:23:17 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/01 06:04:57 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/01 07:10:48 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,20 @@ void	ft_print_combn(int n)
 	}
 	c = n - 1;
 	write(1, num, n);
-	++num[c];
 	while (c >= 0)
 	{
-		write(1, ", ", 2);
-		write(1, num, n);
 		if (num[c] == max[c])
 			--c;
 		else if (c != n - 1)
-			num[++c] = num[c - 1];
+		{
+			++c;
+			num[c] = num[c - 1];
+		}
 		++num[c];
+		if (c == n - 1 || num[c] == max[c])
+		{
+			write(1, ", ", 2);
+			write(1, num, n);
+		}
 	}
 }
