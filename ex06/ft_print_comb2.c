@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:49:35 by emendes-          #+#    #+#             */
-/*   Updated: 2021/03/31 21:02:13 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/01 06:00:39 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_print_comb2(void)
 {
-	int counter;
-	char c;
-	char sep[2];
+	int		counter;
+	char	c;
+	char	sep[2];
 
 	counter = 0;
 	sep[0] = ',';

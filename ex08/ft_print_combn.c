@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 00:23:17 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/01 05:46:56 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/01 06:04:57 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,15 @@
 
 void	ft_print_combn(int n)
 {
-	char num[9];
-	char max[9];
-	char separator[2];
-	int c;
+	char	num[9];
+	char	max[9];
+	char	separator[2];
+	int		c;
 
-	separator[0] = ',';
-	separator[1] = ' ';
 	c = n - 1;
 	while (c >= 0)
 	{
-		max[c] = '9' - (n-1) + c;
+		max[c] = '9' - (n - 1) + c;
 		num[c] = '0' + c;
 		--c;
 	}
@@ -33,17 +31,12 @@ void	ft_print_combn(int n)
 	++num[c];
 	while (c >= 0)
 	{
-		write(1, separator, 2);
+		write(1, ", ", 2);
 		write(1, num, n);
 		if (num[c] == max[c])
-		{
 			--c;
-		}
 		else if (c != n - 1)
-		{
-			++c;
-			num[c] = num[c - 1];
-		}
+			num[++c] = num[c - 1];
 		++num[c];
 	}
 }
