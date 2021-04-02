@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 20:49:35 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/01 07:50:51 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/02 01:07:47 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	ft_print_comb2(void)
 		write(1, &c, 1);
 		c = counter2 % 10 + '0';
 		write(1, &c, 1);
+		++counter2;
 		if (counter2 == 100)
 		{
-			counter2 = ++counter1;
+			counter2 = ++counter1 + 1;
 		}
-		++counter2;
 	}
 }
