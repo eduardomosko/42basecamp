@@ -6,15 +6,19 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 04:18:21 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/02 04:23:21 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/03 16:16:56 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 char	*ft_strcpy(char *dest, char *src)
 {
+	char *ret;
+
+	ret = dest;
 	while (*src != '\0')
 	{
 		*dest++ = *src++;
 	}
-	return (dest);
+	*dest = '\0';
+	return (ret);
 }
