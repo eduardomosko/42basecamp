@@ -6,9 +6,11 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 14:28:46 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/03 14:57:45 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/03 15:21:19 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+void	ft_putchar(char c);
 
 void	rush(int x, int y)
 {

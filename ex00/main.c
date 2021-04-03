@@ -6,9 +6,11 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 14:22:27 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/03 15:01:36 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/03 15:20:30 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+void	rush(int x, int y);
 
 int		main(void)
 {
