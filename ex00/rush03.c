@@ -6,7 +6,7 @@
 /*   By: jwesley- <jwesley-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:47:56 by jwesley-          #+#    #+#             */
-/*   Updated: 2021/04/03 18:23:56 by jwesley-         ###   ########.fr       */
+/*   Updated: 2021/04/03 19:57:00 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	rush(int x, int y)
 		{
 			if ((ypo == 0 && xpo == 0) || (ypo == y - 1 && xpo == 0))
 				ft_putchar('A');
-			else if ((ypo == 0 && xpo == x - 1) || (ypo == y - 1 && xpo == x - 1))
+			else if ((ypo == 0 && xpo == x - 1) ||
+						(ypo == y - 1 && xpo == x - 1))
 				ft_putchar('C');
 			else if (ypo == 0 || ypo == y - 1)
 				ft_putchar('B');
