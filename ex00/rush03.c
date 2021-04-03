@@ -6,7 +6,7 @@
 /*   By: jwesley- <jwesley-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 15:47:56 by jwesley-          #+#    #+#             */
-/*   Updated: 2021/04/03 16:58:05 by jwesley-         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:22:55 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,32 @@ void	ft_putchar(char c);
 
 void	rush(int x, int y)
 {
-	int i;
-	int j;
+	int x_tamanho;
+	int y_tamanho;
+	int x_pos;
+	int y_pos;
 
-	i = 0;
-	while (i < y)
+	x_tamanho = x;
+	y_tamanho = y;
+	y_pos = 0;
+	while (y_pos < y_tamanho)
 	{
-		j = 0;
-		while (j < x)
+		x_pos = 0;
+		while (x_pos < x_tamanho)
 		{
-			if ((i == 0 && j == 0) || (i == y - 1 && j == 0))
+			if ((y_pos == 0 && x_pos == 0) || (y_pos == y - 1 && x_pos == 0))
 				ft_putchar('A');
-			else if ((i == 0 && j == x - 1) || (i == y - 1 && j == x - 1))
+			else if ((y_pos == 0 && x_pos == x - 1) || (y_pos == y - 1 && x_pos == x - 1))
 				ft_putchar('C');
-			else if (i == 0 || i == y - 1)
+			else if (y_pos == 0 || y_pos == y - 1)
 				ft_putchar('B');
-			else if (j == 0 || j == x - 1)
+			else if (x_pos == 0 || x_pos == x - 1)
 				ft_putchar('B');
 			else
 				ft_putchar(' ');
-			++j;
+			++x_pos;
 		}
 		ft_putchar('\n');
-		i++;
+		y_pos++;
 	}
 }
