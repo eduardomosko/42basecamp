@@ -6,14 +6,17 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 12:40:31 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/02 12:47:55 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/03 16:40:44 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_str_is_alpha(char *str)
 {
 	while (*str != '\0')
-		if (!('z' >= *str >= 'a' || 'Z' >= *str >= 'A'))
+	{
+		if (!(('z' >= *str && *str >= 'a') || ('Z' >= *str && *str >= 'A')))
 			return (0);
+		++str;
+	}
 	return (1);
 }

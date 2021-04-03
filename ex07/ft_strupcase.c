@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 01:44:51 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/03 01:49:17 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/03 18:02:16 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,12 @@ char *ft_strupcase(char *str)
 {
 	char *it;
 
-	it = str
+	it = str;
 	while (*it != '\0')
+	{
 		if ('a' <= *it && *it <= 'z')
 			*it = *it - 'a' + 'A';
+		++it;
+	}
 	return (str);
 }

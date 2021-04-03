@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 01:43:24 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/03 01:43:36 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:36:12 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@ int ft_str_is_uppercase(char *str)
 {
 	while (*str != '\0')
 	{
-		if (!('a' <= *str && *str <= 'z'))
+		if (!('A' <= *str && *str <= 'Z'))
 			return (0);
 		++str;
 	}

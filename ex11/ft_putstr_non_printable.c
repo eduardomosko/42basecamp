@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 03:02:09 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/03 03:19:04 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:32:05 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ void	ft_putstr_non_printable(char *str)
 
 	buf[0] = '\\';
 	temp = '0';
-	while (temp <= '9');
+	while (temp <= '9')
 		lookup[temp - '0'] = temp;
 	temp = 'a';
-	while (temp <= 'f');
+	while (temp <= 'f')
 		lookup[10 + temp - 'a'] = temp;
 	while (*str != '\0')
 	{

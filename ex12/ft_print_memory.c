@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 03:49:15 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/03 13:11:05 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/03 17:33:28 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	edu_print_ptr(void *ptr)
 	unsigned int	i;
 
 	i = 0;
-	bytes = &ptr;
+	bytes = (char*) &ptr;
 	while (i < sizeof(ptr))
 	{
 		edu_print_byte_hex(*bytes++);
@@ -57,7 +57,7 @@ void	edu_print_mem_hex(char *mem, unsigned int s)
 	}
 }
 
-void	edu_safe_print_chars(char *c, unsigned int size)
+void	edu_safe_print_chars(char *c, unsigned int s)
 {
 	unsigned int i;
 
