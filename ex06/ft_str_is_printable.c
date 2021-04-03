@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 01:43:58 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/03 01:44:30 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/03 03:00:23 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@ int ft_str_is_printable(char *str)
 {
 	while (*str != '\0')
 	{
-		if (32 <= *str && *str <= 120)
+		if (32 <= *str && *str <= 126)
 			return (0);
 		++str;
 	}
