@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 03:49:15 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/04 15:43:50 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/04 16:05:15 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	*ft_print_memory(void *addr, unsigned int size)
 	while (printed < size)
 	{
 		edu_print_ptr(&addr[printed]);
-		write(1, ":", 2);
+		write(1, ":", 1);
 		to_print = size - printed > 16 ? 16 : size - printed;
 		edu_print_mem_hex(&addr[printed], to_print);
 		write(1, "                                        ", (41 - (to_print * 2) - (to_print / 2) - (to_print % 2)) );
