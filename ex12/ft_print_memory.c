@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 03:49:15 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/04 04:00:10 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/04 04:01:54 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	*ft_print_memory(void *addr, unsigned int size)
 		edu_print_mem_hex(&addr[printed], to_print);
 		write(1, " ", 1);
 		if (to_print < 16)
-			write(1, "    ", to_print % 2 ? 2 : 4);
+			write(1, "    ", to_print % 2 ? 1 : 4);
 		edu_safe_print_chars(&addr[printed], to_print);
 		write(1, "\n", 1);
 		printed += to_print;
