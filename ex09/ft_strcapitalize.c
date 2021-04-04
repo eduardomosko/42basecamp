@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 02:08:52 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/04 03:59:15 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/04 15:57:27 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,13 @@ char	*ft_strcapitalize(char *str)
 		{
 			if (should_cap && 'a' <= *it && *it <= 'z')
 				*it = *it - 'a' + 'A';
-			should_cap = FALSE;
+			if ((!should_cap) && 'A' <= *it && *it <= 'Z')
+				*it = *it - 'A' + 'a';
+			should_cap = 0;
 		}
 		else
 		{
-			should_cap = TRUE;
+			should_cap = 1;
 		}
 		++it;
 	}
