@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 03:49:15 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/03 17:33:28 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/04 02:03:33 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ typedef int	t_bool;
 #define FALSE 0
 
 const char	g_hex_lookup[16] = {
-	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e'};
+	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
 
 void	edu_print_byte_hex(char c)
 {
@@ -31,16 +31,13 @@ void	edu_print_byte_hex(char c)
 
 void	edu_print_ptr(void *ptr)
 {
-	char			*bytes;
-	unsigned int	i;
+	char			*begin;
+	char			*end;
 
-	i = 0;
-	bytes = (char*) &ptr;
-	while (i < sizeof(ptr))
-	{
-		edu_print_byte_hex(*bytes++);
-		++i;
-	}
+	begin = ((char*) &ptr) + sizeof(ptr) - 1;
+	end = ((char*) &ptr) - 1;
+	while (begin != end)
+		edu_print_byte_hex(*begin--);
 }
 
 void	edu_print_mem_hex(char *mem, unsigned int s)
@@ -50,10 +47,10 @@ void	edu_print_mem_hex(char *mem, unsigned int s)
 	i = 0;
 	while (i < s)
 	{
+		if ((i + 1) % 2 != 0)
+			write(1, " ", 1);
 		edu_print_byte_hex(*mem++);
 		++i;
-		if (i % 2 != 0)
-			write(1, " ", 1);
 	}
 }
 
@@ -68,6 +65,8 @@ void	edu_safe_print_chars(char *c, unsigned int s)
 			write(1, c, 1);
 		else
 			write(1, ".", 1);
+		++c;
+		++i;
 	}
 }
 
@@ -80,10 +79,12 @@ void	*ft_print_memory(void *addr, unsigned int size)
 	while (printed < size)
 	{
 		edu_print_ptr(&addr[printed]);
-		write(1, ": ", 1);
+		write(1, ": ", 2);
 		to_print = size - printed > 16 ? 16 : size - printed;
 		edu_print_mem_hex(&addr[printed], to_print);
 		write(1, " ", 1);
+		if (to_print < 16)
+			write(1, "    ", 4);
 		edu_safe_print_chars(&addr[printed], to_print);
 		write(1, "\n", 1);
 		printed += to_print;
