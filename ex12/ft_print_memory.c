@@ -6,16 +6,11 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 03:49:15 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/04 04:01:54 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/04 15:43:50 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-
-typedef int	t_bool;
-
-#define TRUE  1
-#define FALSE 0
 
 const char	g_hex_lookup[17] = "0123456789abcdef";
 
@@ -78,15 +73,14 @@ void	*ft_print_memory(void *addr, unsigned int size)
 	while (printed < size)
 	{
 		edu_print_ptr(&addr[printed]);
-		write(1, ": ", 2);
+		write(1, ":", 2);
 		to_print = size - printed > 16 ? 16 : size - printed;
 		edu_print_mem_hex(&addr[printed], to_print);
-		write(1, " ", 1);
-		if (to_print < 16)
-			write(1, "    ", to_print % 2 ? 1 : 4);
+		write(1, "                                        ", (41 - (to_print * 2) - (to_print / 2) - (to_print % 2)) );
 		edu_safe_print_chars(&addr[printed], to_print);
 		write(1, "\n", 1);
 		printed += to_print;
 	}
 	return (addr);
 }
+//0000000000404567: 0d0a 7072 696e 745f 6d65 6d6f 7279 0a0a ..print_memory..
