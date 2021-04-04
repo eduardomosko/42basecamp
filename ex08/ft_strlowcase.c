@@ -6,11 +6,11 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 01:47:21 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/03 18:02:22 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/04 03:57:11 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char *ft_strlowcase(char *str)
+char	*ft_strlowcase(char *str)
 {
 	char *it;
 

@@ -6,11 +6,11 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 01:43:58 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/03 17:49:41 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/04 03:56:39 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_str_is_printable(char *str)
+int	ft_str_is_printable(char *str)
 {
 	while (*str != '\0')
 	{

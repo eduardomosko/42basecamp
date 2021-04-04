@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 03:49:15 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/04 03:44:12 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/04 04:00:10 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	edu_print_byte_hex(char c)
 {
 	char hex[2];
 
-	hex[0] = g_hex_lookup[((unsigned char) c) / 16];
-	hex[1] = g_hex_lookup[((unsigned char) c) % 16];
+	hex[0] = g_hex_lookup[((unsigned char)c) / 16];
+	hex[1] = g_hex_lookup[((unsigned char)c) % 16];
 	write(1, hex, 2);
 }
 
@@ -33,8 +33,8 @@ void	edu_print_ptr(void *ptr)
 	char *begin;
 	char *end;
 
-	begin = ((char*) &ptr) + sizeof(ptr) - 1;
-	end = ((char*) &ptr) - 1;
+	begin = ((char*)&ptr) + sizeof(ptr) - 1;
+	end = ((char*)&ptr) - 1;
 	while (begin != end)
 		edu_print_byte_hex(*begin--);
 }
@@ -88,5 +88,5 @@ void	*ft_print_memory(void *addr, unsigned int size)
 		write(1, "\n", 1);
 		printed += to_print;
 	}
-	return addr;
+	return (addr);
 }
