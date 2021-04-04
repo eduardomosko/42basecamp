@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 03:49:15 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/04 02:03:33 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/04 03:44:12 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,22 +17,21 @@ typedef int	t_bool;
 #define TRUE  1
 #define FALSE 0
 
-const char	g_hex_lookup[16] = {
-	'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+const char	g_hex_lookup[17] = "0123456789abcdef";
 
 void	edu_print_byte_hex(char c)
 {
 	char hex[2];
 
-	hex[0] = g_hex_lookup[c / 16];
-	hex[1] = g_hex_lookup[c % 16];
+	hex[0] = g_hex_lookup[((unsigned char) c) / 16];
+	hex[1] = g_hex_lookup[((unsigned char) c) % 16];
 	write(1, hex, 2);
 }
 
 void	edu_print_ptr(void *ptr)
 {
-	char			*begin;
-	char			*end;
+	char *begin;
+	char *end;
 
 	begin = ((char*) &ptr) + sizeof(ptr) - 1;
 	end = ((char*) &ptr) - 1;
@@ -84,7 +83,7 @@ void	*ft_print_memory(void *addr, unsigned int size)
 		edu_print_mem_hex(&addr[printed], to_print);
 		write(1, " ", 1);
 		if (to_print < 16)
-			write(1, "    ", 4);
+			write(1, "    ", to_print % 2 ? 2 : 4);
 		edu_safe_print_chars(&addr[printed], to_print);
 		write(1, "\n", 1);
 		printed += to_print;

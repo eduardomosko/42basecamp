@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/02 12:48:32 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/03 16:47:47 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/04 02:24:52 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,5 @@ int	ft_str_is_numeric(char *str)
 			return (0);
 		++str;
 	}
-
 	return (1);
 }

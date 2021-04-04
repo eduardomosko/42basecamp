@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 03:02:09 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/03 23:49:29 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/04 02:51:16 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_putstr_non_printable(char *str)
 				offset = 1;
 				buf[1] = '-';
 			}
-			buf[1 + offset] = g_lookup[*str / 16 * (offset ? -1 : 1)];
+			buf[1 + offset] = g_lookup[((*str / 16) % 16) * (offset ? -1 : 1)];
 			buf[2 + offset] = g_lookup[*str % 16 * (offset ? -1 : 1)];
 			write(1, buf, (3 + offset));
 		}

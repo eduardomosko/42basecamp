@@ -6,11 +6,11 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/03 01:43:24 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/03 17:36:12 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/04 02:25:35 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_str_is_uppercase(char *str)
+int	ft_str_is_uppercase(char *str)
 {
 	while (*str != '\0')
 	{
