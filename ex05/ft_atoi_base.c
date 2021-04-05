@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 05:02:13 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/05 07:42:10 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/05 07:44:03 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static unsigned int	check_base(char *base)
 		while (j < i)
 			if (base[j++] == base[i])
 				return (0);
-		if (base[i] == '-' || base[i] == '+' || (9 <= base[i] && base[i] <= 15) || base[i] == ' ')
+		if (base[i] == '-' || base[i] == '+' ||
+				(9 <= base[i] && base[i] <= 15) || base[i] == ' ')
 			return (0);
 		++i;
 	}
@@ -42,10 +43,10 @@ int					findchar(char c, char *str)
 
 int					ft_atoi_base(char *str, char *base)
 {
-	int	sign;
-	int	num;
-	int offset;
-	unsigned int basen;
+	int				sign;
+	int				num;
+	int				offset;
+	unsigned int	basen;
 
 	if ((basen = check_base(base)) < 2)
 		return (0);

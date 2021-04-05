@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/31 21:55:32 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/05 04:45:31 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/05 07:42:54 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_putnbr(int nb)
 {
-	char	c;
-	unsigned int		div;
-	unsigned int		num;
+	char			c;
+	unsigned int	div;
+	unsigned int	num;
 
 	if (nb < 0)
 		write(1, "-", 1);
