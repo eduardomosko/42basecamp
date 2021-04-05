@@ -1,16 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/31 21:55:32 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/05 07:02:26 by emendes-         ###   ########.fr       */
+/*   Created: 2021/04/05 05:02:13 by emendes-          #+#    #+#             */
+/*   Updated: 2021/04/05 07:42:10 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <unistd.h>
 
 static unsigned int	check_base(char *base)
 {
@@ -24,37 +22,48 @@ static unsigned int	check_base(char *base)
 		while (j < i)
 			if (base[j++] == base[i])
 				return (0);
-		if (base[i] == '-' || base[i] == '+')
+		if (base[i] == '-' || base[i] == '+' || (9 <= base[i] && base[i] <= 15) || base[i] == ' ')
 			return (0);
 		++i;
 	}
 	return (i);
 }
 
-void				ft_putnbr_base(int nb, char *base)
+int					findchar(char c, char *str)
 {
-	char			c;
-	unsigned int	div;
-	unsigned int	num;
-	unsigned int	basen;
+	int i;
+
+	i = -1;
+	while (str[++i] != '\0')
+		if (c == str[i])
+			return (i);
+	return (-1);
+}
+
+int					ft_atoi_base(char *str, char *base)
+{
+	int	sign;
+	int	num;
+	int offset;
+	unsigned int basen;
 
 	if ((basen = check_base(base)) < 2)
-		return ;
-	if (nb < 0)
-		write(1, "-", 1);
-	num = nb < 0 ? (-1) * nb : nb;
-	div = 1;
-	while (num / basen)
+		return (0);
+	while ((9 <= *str && *str <= 15) || *str == ' ')
+		++str;
+	sign = 1;
+	while (*str == '+' || *str == '-')
 	{
-		num /= basen;
-		div *= basen;
+		if (*str == '-')
+			sign = -sign;
+		++str;
 	}
-	num = nb < 0 ? (-1) * nb : nb;
-	while (div)
+	num = 0;
+	while ((offset = findchar(*str, base)) >= 0)
 	{
-		c = base[num / div];
-		write(1, &c, 1);
-		num = num % div;
-		div = div / basen;
+		num *= basen;
+		num += sign * offset;
+		++str;
 	}
+	return (num);
 }
