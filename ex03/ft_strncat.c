@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 03:09:42 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/05 03:13:08 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/06 01:38:38 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ char	*ft_strncat(char *dest, char *src, unsigned int nb)
 		*dest++ = *src++;
 		++i;
 	}
+	*dest = '\0';
 	return (ret);
 }

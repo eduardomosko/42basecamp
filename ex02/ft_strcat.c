@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 02:59:29 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/05 03:05:58 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/06 01:39:31 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,5 +19,6 @@ char	*ft_strcat(char *dest, char *src)
 		++dest;
 	while (*src != '\0')
 		*dest++ = *src++;
+	*dest = '\0';
 	return (ret);
 }
