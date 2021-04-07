@@ -5,53 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/06 17:23:15 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/07 04:05:20 by emendes-         ###   ########.fr       */
+/*   Created: 2021/04/07 21:17:39 by emendes-          #+#    #+#             */
+/*   Updated: 2021/04/07 21:31:03 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
+#include <stdio.h>
+
+void edu_zero_buffer(char *buff, unsigned int s)
+{
+	unsigned int i;
+
+	i = -1;
+	while (++i < s)
+		buff[i] = 0;
+}
 
 /*
 ** Checks if a position attends the condition that
 ** a queen can't reach another in only one move
 */
 
-int		edu_validate_placement(char *pos)
+int     edu_validate_placement(char *pos)
 {
+	char buff[19];
 	int i;
-	int j;
 
-	i = 0;
-	while (i < 10)
-	{
-		j = i;
-		while (++j < 10)
-			if (pos[i] == pos[j])
-				return (0);
-		j = i;
-		while (++j < 10)
-			if (pos[i] == pos[j] + (j - i))
-				return (0);
-		j = i;
-		while (++j < 10)
-			if (pos[i] == pos[j] - (j - i))
-				return (0);
-		++i;
-	}
+	edu_zero_buffer(buff, 19);
+	i = -1;
+	while (++i < 10)
+		if (buff[pos[i] - '0']++)
+			return (0);
+	edu_zero_buffer(buff, 19);
+	i = -1;
+	while (++i < 10)
+		if (buff[(pos[i] - '0') - i + 9]++)
+			return (0);
+	edu_zero_buffer(buff, 19);
+	i = -1;
+	while (++i < 10)
+		if (buff[(pos[i] - '0') + i]++)
+			return (0);
 	return (1);
 }
 
-int		edu_ten_queens_puzzle(int from, char *buffer)
+int     edu_ten_queens_puzzle(int from, char first_pos, char last_pos, char *buffer)
 {
 	int count;
 
 	count = 0;
-	buffer[from] = '0';
-	while (buffer[from] <= '9')
+	buffer[from] = first_pos;
+	while (buffer[from] <= last_pos)
 	{
 		if (from < 9)
-			count += edu_ten_queens_puzzle(from + 1, buffer);
+		{
+			count += edu_ten_queens_puzzle(from + 1, '0', buffer[from] - 2, buffer);
+			count += edu_ten_queens_puzzle(from + 1, buffer[from] + 2, '9', buffer);
+		}
 		else if (edu_validate_placement(buffer))
 		{
 			++count;
@@ -62,10 +73,10 @@ int		edu_ten_queens_puzzle(int from, char *buffer)
 	return (count);
 }
 
-int		ft_ten_queens_puzzle(void)
+int     ft_ten_queens_puzzle(void)
 {
 	char ten_queens_buffer[11];
 
 	ten_queens_buffer[10] = '\n';
-	return (edu_ten_queens_puzzle(0, ten_queens_buffer));
+	return (edu_ten_queens_puzzle(0, '0', '9', ten_queens_buffer));
 }
