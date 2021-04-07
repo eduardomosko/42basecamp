@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 15:43:51 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/07 15:49:11 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/07 16:29:04 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strdup(char *src)
 	unsigned int	n;
 
 	n = 0;
-	while (src[0] != '\0')
+	while (src[n] != '\0')
 		++n;
 	dest = malloc(n + 1);
 	if (dest != NULL)
