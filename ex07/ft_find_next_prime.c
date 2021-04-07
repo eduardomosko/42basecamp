@@ -6,11 +6,9 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:17:21 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/07 18:08:19 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/07 21:45:47 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-int			ft_find_next_prime(int nb);
 
 static int	ft_is_prime(int nb)
 {
@@ -21,7 +19,6 @@ static int	ft_is_prime(int nb)
 	{
 		if (nb % i == 0)
 			return (0);
-
 		if (i == 2)
 			++i;
 		else

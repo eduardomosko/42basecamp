@@ -6,14 +6,14 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 21:17:39 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/07 21:31:03 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/07 21:48:12 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdio.h>
 
-void edu_zero_buffer(char *buff, unsigned int s)
+void	edu_zero_buffer(char *buff, unsigned int s)
 {
 	unsigned int i;
 
@@ -27,10 +27,10 @@ void edu_zero_buffer(char *buff, unsigned int s)
 ** a queen can't reach another in only one move
 */
 
-int     edu_validate_placement(char *pos)
+int		edu_validate_placement(char *pos)
 {
-	char buff[19];
-	int i;
+	char	buff[19];
+	int		i;
 
 	edu_zero_buffer(buff, 19);
 	i = -1;
@@ -50,18 +50,20 @@ int     edu_validate_placement(char *pos)
 	return (1);
 }
 
-int     edu_ten_queens_puzzle(int from, char first_pos, char last_pos, char *buffer)
+int		edu_ten_queens_puzzle(int from, char fpos, char lpos, char *buffer)
 {
 	int count;
 
 	count = 0;
-	buffer[from] = first_pos;
-	while (buffer[from] <= last_pos)
+	buffer[from] = fpos;
+	while (buffer[from] <= lpos)
 	{
 		if (from < 9)
 		{
-			count += edu_ten_queens_puzzle(from + 1, '0', buffer[from] - 2, buffer);
-			count += edu_ten_queens_puzzle(from + 1, buffer[from] + 2, '9', buffer);
+			count += edu_ten_queens_puzzle(
+					from + 1, '0', buffer[from] - 2, buffer);
+			count += edu_ten_queens_puzzle(
+					from + 1, buffer[from] + 2, '9', buffer);
 		}
 		else if (edu_validate_placement(buffer))
 		{
@@ -73,7 +75,7 @@ int     edu_ten_queens_puzzle(int from, char first_pos, char last_pos, char *buf
 	return (count);
 }
 
-int     ft_ten_queens_puzzle(void)
+int		ft_ten_queens_puzzle(void)
 {
 	char ten_queens_buffer[11];
 
