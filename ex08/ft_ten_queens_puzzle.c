@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 17:23:15 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/07 02:01:44 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/07 04:05:20 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int		edu_validate_placement(char *pos)
 {
 	int i;
 	int j;
-	int temp;
 
 	i = 0;
 	while (i < 10)
@@ -31,12 +30,12 @@ int		edu_validate_placement(char *pos)
 			if (pos[i] == pos[j])
 				return (0);
 		j = i;
-		while (++j < 10 && ((temp = pos[j] + (j - i)) >= '0' || temp <= '9'))
-			if (pos[i] == temp)
+		while (++j < 10)
+			if (pos[i] == pos[j] + (j - i))
 				return (0);
 		j = i;
-		while (++j < 10 && ((temp = pos[j] - (j - i)) >= '0' || temp <= '9'))
-			if (pos[i] == temp)
+		while (++j < 10)
+			if (pos[i] == pos[j] - (j - i))
 				return (0);
 		++i;
 	}
