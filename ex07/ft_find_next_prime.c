@@ -6,16 +6,18 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:17:21 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/08 15:04:49 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/08 15:37:59 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#define SQRT_MAX 46341
 
 static int	ft_is_prime(int nb)
 {
 	int i;
 
 	i = 2;
-	while (i * i <= nb && i * i > 0)
+	while (i * i <= nb && i <= SQRT_MAX)
 	{
 		if (nb % i == 0)
 			return (0);
