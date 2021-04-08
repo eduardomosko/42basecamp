@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 21:17:39 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/07 22:42:06 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/08 18:59:37 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,24 @@ void	edu_zero_buffer(char *buff, unsigned int s)
 ** a queen can't reach another in only one move
 */
 
-int		edu_validate_placement(char *pos)
+int		edu_validate_until(char *pos, int max_pos)
 {
 	char	buff[19];
 	int		i;
 
 	edu_zero_buffer(buff, 19);
 	i = -1;
-	while (++i < 10)
+	while (++i < max_pos + 1)
 		if (buff[pos[i] - '0']++)
 			return (0);
 	edu_zero_buffer(buff, 19);
 	i = -1;
-	while (++i < 10)
+	while (++i < max_pos + 1)
 		if (buff[(pos[i] - '0') - i + 9]++)
 			return (0);
 	edu_zero_buffer(buff, 19);
 	i = -1;
-	while (++i < 10)
+	while (++i < max_pos + 1)
 		if (buff[(pos[i] - '0') + i]++)
 			return (0);
 	return (1);
@@ -57,14 +57,14 @@ int		edu_ten_queens_puzzle(int from, char fpos, char lpos, char *buffer)
 	buffer[from] = fpos;
 	while (buffer[from] <= lpos)
 	{
-		if (from < 9)
+		if (from < 9 && (edu_validate_until(buffer, from)))
 		{
 			count += edu_ten_queens_puzzle(
 					from + 1, '0', buffer[from] - 2, buffer);
 			count += edu_ten_queens_puzzle(
 					from + 1, buffer[from] + 2, '9', buffer);
 		}
-		else if (edu_validate_placement(buffer))
+		else if (edu_validate_until(buffer, 9))
 		{
 			++count;
 			write(1, buffer, 11);
