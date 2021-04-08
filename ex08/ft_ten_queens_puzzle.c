@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 21:17:39 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/08 18:59:37 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/08 19:16:08 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int		edu_ten_queens_puzzle(int from, char fpos, char lpos, char *buffer)
 			count += edu_ten_queens_puzzle(
 					from + 1, buffer[from] + 2, '9', buffer);
 		}
-		else if (edu_validate_until(buffer, 9))
+		else if (from == 9 && edu_validate_until(buffer, 9))
 		{
 			++count;
 			write(1, buffer, 11);
