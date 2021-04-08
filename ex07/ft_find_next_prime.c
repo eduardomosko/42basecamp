@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/06 15:17:21 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/07 21:45:47 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/08 15:04:49 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ static int	ft_is_prime(int nb)
 	int i;
 
 	i = 2;
-	while (i <= nb / 2)
+	while (i * i <= nb && i * i > 0)
 	{
 		if (nb % i == 0)
 			return (0);
