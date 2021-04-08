@@ -6,12 +6,11 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 21:17:39 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/07 21:48:12 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/07 22:42:06 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include <stdio.h>
 
 void	edu_zero_buffer(char *buff, unsigned int s)
 {
