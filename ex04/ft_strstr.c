@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/05 03:17:32 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/09 21:23:31 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/09 21:26:29 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@ char	*ft_strstr(char *str, char *to_find)
 	char	*itstr;
 	char	*itfind;
 
+	if (*to_find == '\0')
+		return (str);
 	while (*str != '\0')
 	{
 		itstr = str;
@@ -28,5 +30,5 @@ char	*ft_strstr(char *str, char *to_find)
 			return (str);
 		++str;
 	}
-	return (*to_find == '\0');
+	return (0);
 }
