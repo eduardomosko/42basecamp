@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 15:09:06 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/07 15:28:28 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/09 04:21:49 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static int	ft_strcmp(char *s1, char *s2)
 	return (((int)(unsigned char)*s1) - ((int)(unsigned char)*s2));
 }
 
-void	ft_sort_string_arr(char **arr, int size)
+void		ft_sort_string_arr(char **arr, int size)
 {
 	int		max_pos;
 	int		i;
-	char* 	temp;
+	char	*temp;
 
 	max_pos = size;
 	while (max_pos > 0)
