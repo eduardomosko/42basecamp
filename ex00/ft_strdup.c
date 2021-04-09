@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/07 15:43:51 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/07 16:29:04 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/09 05:05:17 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_strdup(char *src)
 {
-	char*			dest;
+	char			*dest;
 	unsigned int	n;
 
 	n = 0;
@@ -29,4 +29,3 @@ char	*ft_strdup(char *src)
 	}
 	return (dest);
 }
-
