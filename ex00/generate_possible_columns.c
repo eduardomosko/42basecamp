@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 22:32:19 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/10 01:30:37 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/10 01:38:17 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** partindo da esquerda (começo do array) para a direita (final do array)
 */
 
-int visible_left(char *array)
+int		visible_left(char *array)
 {
 	int count;
 	int max;
@@ -47,7 +47,7 @@ int visible_left(char *array)
 ** partindo da direita (final do array) para a esquerda (começo do array)
 */
 
-int visible_right(char *array)
+int		visible_right(char *array)
 {
 	int count;
 	int max;
@@ -71,12 +71,12 @@ int visible_right(char *array)
 /*
 ** Verifica se uma posição é valida
 **
-** Transforma um número em uma posição ('1' vira 0, '2' vira 1 ....) e aumenta 1 à
-** posição de um array. Se já tiver alguma coisa lá é pq o número está repetido, então
-** a posição é inválida
+** Transforma um número em uma posição ('1' vira 0, '2' vira 1 ....)
+** e aumenta 1 à posição de um array. Se já tiver alguma coisa lá é
+** pq o número está repetido, então a posição é inválida
 */
 
-int validate_position(char *array, int until)
+int		validate_position(char *array, int until)
 {
 	int pos[4];
 	int i;
@@ -102,15 +102,18 @@ int validate_position(char *array, int until)
 ** novas possibilidades
 */
 
-void generate_combinations(char *array, int from)
+void	generate_combinations(char *array, int from)
 {
+	char left;
+	char right;
+
 	array[from] = '1';
 	while (array[from] <= '4')
 	{
 		if (from == 3 && validate_position(array, from))
 		{
-			char left = visible_left(array) + '0';
-			char right = visible_right(array) + '0';
+			left = visible_left(array) + '0';
+			right = visible_right(array) + '0';
 			write(1, &left, 1);
 			write(1, " ", 1);
 			write(1, array, 4);
@@ -126,8 +129,13 @@ void generate_combinations(char *array, int from)
 	}
 }
 
-int main()
+int		main(void)
 {
-	char array[] = "0000";
+	char array[4];
+
+	array[0] = '0';
+	array[1] = '0';
+	array[2] = '0';
+	array[3] = '0';
 	generate_combinations(array, 0);
 }
