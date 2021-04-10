@@ -3,146 +3,96 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: kdepetri <kdepetri@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 16:12:09 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/10 19:22:42 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/10 22:55:17 by kdepetri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <malloc.h>
 #include <unistd.h>
 
-void	edu_zero_buffer(char *buff, unsigned int s)
-{
-	unsigned int i;
-
-	i = -1;
-	while (++i < s)
-		buff[i] = 0;
-}
-
-void	edu_fill_buffer(char *buff, unsigned int s, char value)
-{
-	unsigned int i;
-
-	i = -1;
-	while (++i < s)
-		buff[i] = value;
-}
-
 /*
-** Calcula quantas caixas são visíveis pela esquerda
-**
-** Faz isso checando quantas caixas são maiores que a maior já vista até agora
-** partindo da esquerda (começo do array) para a direita (final do array)
+** Arvore da vida
 */
 
-int		visible_left(char *array)
+const char *g_a11[] = {NULL};
+const char *g_a12[] = {"4123", "4213", NULL};
+const char *g_a13[] = {"4312", "4231", "4132", NULL};
+const char *g_a14[] = {"4321", NULL};
+
+const char *g_a21[] = {"3214", "3124", NULL};
+const char *g_a22[] = {"2143", "2413", "1423", "3142", "3241", "3421", NULL};
+const char *g_a23[] = {"3421", "2431", "1432", NULL};
+const char *g_a24[] = {NULL};
+
+const char *g_a31[] = {"2134", "2314", "1324", NULL};
+const char *g_a32[] = {"1243", "1342", "2341", NULL};
+const char *g_a33[] = {NULL};
+const char *g_a34[] = {NULL};
+
+const char *g_a41[] = {"1234", NULL};
+const char *g_a42[] = {NULL};
+const char *g_a43[] = {NULL};
+const char *g_a44[] = {NULL};
+
+const char **g_tree[] =
+{
+	g_a11, g_a12, g_a13, g_a14,
+	g_a21, g_a22, g_a23, g_a24,
+	g_a31, g_a32, g_a33, g_a34,
+	g_a41, g_a42, g_a43, g_a44
+};
+
+/*
+** Calcula quantas caixas são visíveis
+**
+** Faz isso checando quantas caixas são maiores que a maior já vista até agora
+** partindo da direção definida por dir.
+*/
+
+int		count_visible(char *array, int dir)
 {
 	int count;
 	int max;
 	int i;
+	int end;
 
 	count = 0;
 	max = 0;
-	i = 0;
-	while (i < 4)
+	i = dir > 0 ? 0 : 3;
+	end = dir > 0 ? 4 : -1;
+	while (i != end)
 	{
 		if (max < array[i])
 		{
 			max = array[i];
 			++count;
 		}
-		++i;
+		i += dir;
 	}
 	return (count);
 }
 
-/*
-** Calcula quantas caixas são visíveis pela direita
-**
-** Faz isso checando quantas caixas são maiores que a maior já vista até agora
-** partindo da direita (final do array) para a esquerda (começo do array)
-*/
-
-int		visible_right(char *array)
-{
-	int count;
-	int max;
-	int i;
-
-	count = 0;
-	max = 0;
-	i = 3;
-	while (i >= 0)
-	{
-		if (max < array[i])
-		{
-			max = array[i];
-			++count;
-		}
-		--i;
-	}
-	return (count);
-}
-
-char *a11[] = {NULL};
-char *a12[] = {"4123", "4213", NULL};
-char *a13[] = {"4312", "4231", "4132",  NULL};
-char *a14[] = {"4321", NULL};
-
-char *a21[] = {"3214", "3124", NULL};
-char *a22[] = {"2143", "2413", "1423", "3142", "3241", "3421", NULL};
-char *a23[] = {"3421", "2431", "1432", NULL};
-char *a24[] = {NULL};
-
-char *a31[] = {"2134", "2314", "1324", NULL};
-char *a32[] = {"1243", "1342", "2341", NULL};
-char *a33[] = {NULL};
-char *a34[] = {NULL};
-
-char *a41[] = {"1234", NULL};
-char *a42[] = {NULL};
-char *a43[] = {NULL};
-char *a44[] = {NULL};
-
-
-char **arr[] = {a11, a12, a13, a14, a21, a22, a23, a24, a31, a32, a33, a34, a41, a42, a43, a44};
-
-int vis(int vis_left, int vis_right)
-{
-	return (4 * (vis_left - 1) + (vis_right - 1));
-}
-
-void	copy_possibilitie(char *solution, int row, char *possibilitie)
-{
-	int i;
-
-	solution += row * 5;
-	i = 0;
-	while (i < 4)
-	{
-		*solution++ = *possibilitie++;
-		++i;
-	}
-}
-
-int validate_solution(char *solution, int until)
+int		validate_board(char *board, int until)
 {
 	int pos[4];
 	int index;
 	int i;
 	int j;
+	int z;
 
 	j = 0;
 	while (j < 4)
 	{
 		i = 0;
-		edu_zero_buffer(((char*)pos), 4 * sizeof(int));
+		z = -1;
+		while (++z < 4)
+			pos[z] = 0;
 		while (i < until + 1)
 		{
-			index = solution[i * 5 + j] - '1';
+			index = board[i * 5 + j] - '1';
 			if (pos[index]++)
 				return (0);
 			++i;
@@ -152,13 +102,13 @@ int validate_solution(char *solution, int until)
 	return (1);
 }
 
-int	verify_solution(char *solution, int *condicoes)
+int		is_solved(char *board, int *condicoes)
 {
-	char col[4];
-	int i;
-	int j;
-	int vis_up;
-	int vis_down;
+	char	col[4];
+	int		i;
+	int		j;
+	int		vis_up;
+	int		vis_down;
 
 	i = 0;
 	while (i < 4)
@@ -166,15 +116,14 @@ int	verify_solution(char *solution, int *condicoes)
 		j = 0;
 		while (j < 4)
 		{
-			col[j] = solution[i + 5 * j];
+			col[j] = board[i + 5 * j];
 			++j;
 		}
 		vis_up = condicoes[i];
 		vis_down = condicoes[4 + i];
-
-		if (vis_up != visible_left(col))
+		if (vis_up != count_visible(col, 1))
 			return (0);
-		if (vis_down != visible_right(col))
+		if (vis_down != count_visible(col, -1))
 			return (0);
 		++i;
 	}
@@ -195,56 +144,43 @@ int	verify_solution(char *solution, int *condicoes)
 **  0000\n
 */
 
-int	find_solution(char *solution, int *condicoes, int rowf)
+int		find_board(char *board, int *condicoes, int rowf)
 {
-	int ret;
-	int vis_left;
-	int vis_right;
-	char **possibilities;
+	int				temp;
+	int				vis_left;
+	int				vis_right;
+	const char		**possibilities;
 
 	vis_left = condicoes[(2 * 4) + rowf];
 	vis_right = condicoes[(3 * 4) + rowf];
-
-	possibilities = arr[vis(vis_left, vis_right)];
-
+	possibilities = g_tree[(4 * (vis_left - 1) + (vis_right - 1))];
 	while (*possibilities != NULL)
 	{
-		copy_possibilitie(solution, rowf, *possibilities);
-
-		if (validate_solution(solution, rowf))
+		temp = -1;
+		while (++temp < 4)
+			board[temp + rowf * 5] = (*possibilities)[temp];
+		if (validate_board(board, rowf))
 		{
 			if (rowf >= 3)
-			{
-				if (verify_solution(solution, condicoes))
-				{
-					write(1, solution, 20);
-					return (1);
-				}
-			}
-			else
-			{
-				if ((ret = find_solution(solution, condicoes, rowf + 1)))
-					return (ret);
-			}
+				if (is_solved(board, condicoes))
+					return (write(1, board, 20) || 1);
+			if (rowf < 3)
+				if ((temp = find_board(board, condicoes, rowf + 1)))
+					return (temp);
 		}
-		//write(1, "\n", 1);
 		++possibilities;
 	}
-	if (rowf == 0)
-		write(1, "Error\n", 6);
-	return (0);
+	return ((rowf == 0 && write(1, "Error\n", 6)) && 0);
 }
 
-int main()
+int		main()
 {
-	char solution[20];
-	edu_fill_buffer(solution, 20, 'i');
-	solution[4] = '\n';
-	solution[9] = '\n';
-	solution[14] = '\n';
-	solution[19] = '\n';
+	char board[20];
+	board[4] = '\n';
+	board[9] = '\n';
+	board[14] = '\n';
+	board[19] = '\n';
 	int condicoes[] = {3,2,3,1,1,3,2,2,3,2,2,1,1,3,2,2};
 
-	find_solution(solution, condicoes, 0);
+	find_board(board, condicoes, 0);
 }
-
