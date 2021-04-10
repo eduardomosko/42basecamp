@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:57:36 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/10 12:51:47 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/10 13:32:49 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,16 @@
 
 int				ft_get_int_base(char *base)
 {
-	int offset;
 	int offset_check;
-	int int_base;
+	int offset;
 
 	offset = 0;
 	while (base[offset] != '\0')
 	{
+		if (base[offset] == '-' || base[offset] == '+' ||
+				(9 <= base[offset] && base[offset] <= 15)
+				|| base[offset] == ' ')
+			return (0);
 		offset_check = 1;
 		while (base[offset + offset_check] != '\0')
 		{
@@ -30,16 +33,16 @@ int				ft_get_int_base(char *base)
 		}
 		offset++;
 	}
-	int_base = 0;
-	while (base[int_base] != '\0')
-		int_base++;
-	return (int_base >= 2 ? int_base : -1);
+	return (offset >= 2 ? offset : -1);
 }
 
 static char		*ft_nbr_string(int nb, int int_base, char *base, int digits)
 {
-	static char nbr_s[MAX_DIGITS];
+	char	*nbr_s;
 
+	if ((nbr_s = malloc(digits + 1)) == 0)
+		return (NULL);
+	nbr_s[digits] = '\0';
 	nb *= nb < 0 ? 1 : -1;
 	while (digits--)
 	{
@@ -49,7 +52,7 @@ static char		*ft_nbr_string(int nb, int int_base, char *base, int digits)
 	return (nbr_s);
 }
 
-void			ft_putnbr_base(int nb, char *base)
+char			*ft_itoa_base(int nb, char *base)
 {
 	int				digits;
 	int				counter;
@@ -63,6 +66,5 @@ void			ft_putnbr_base(int nb, char *base)
 	counter = nb;
 	while (counter /= int_base)
 		digits++;
-	nbr_s = ft_nbr_string(nb, int_base, base, digits);
-	write(1, nbr_s, 32);
+	return (ft_nbr_string(nb, int_base, base, digits));
 }
