@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 16:12:09 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/10 18:33:23 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/10 19:22:42 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,6 @@ int	verify_solution(char *solution, int *condicoes)
 		vis_up = condicoes[i];
 		vis_down = condicoes[4 + i];
 
-		//printf("vu: %i got %i\t vd: %i got %i\n", vis_up, visible_left(col), vis_down, visible_right(col));
 		if (vis_up != visible_left(col))
 			return (0);
 		if (vis_down != visible_right(col))
@@ -182,17 +181,19 @@ int	verify_solution(char *solution, int *condicoes)
 	return (1);
 }
 
-// Condições
-//  col1up    col2up    col3up    col4up
-//  col1down  col2down  col3down  col4down
-//  row1left  row2left  row3left  row4left
-// row1right row2right row3right row4right
-//
-// Solução
-// 0000\n
-// 0000\n
-// 0000\n
-// 0000\n
+/*
+** Condições
+**  col1up    col2up    col3up    col4up
+**  col1down  col2down  col3down  col4down
+**  row1left  row2left  row3left  row4left
+**  row1right row2right row3right row4right
+**
+** Solução
+**  0000\n
+**  0000\n
+**  0000\n
+**  0000\n
+*/
 
 int	find_solution(char *solution, int *condicoes, int rowf)
 {
@@ -201,26 +202,17 @@ int	find_solution(char *solution, int *condicoes, int rowf)
 	int vis_right;
 	char **possibilities;
 
-	//printf("%i  %i\n", (2 * 4) + rowf, (3 * 4) + rowf);
 	vis_left = condicoes[(2 * 4) + rowf];
 	vis_right = condicoes[(3 * 4) + rowf];
 
 	possibilities = arr[vis(vis_left, vis_right)];
 
-	//printf("%i: vl %i   vr %i    index %i\n", rowf, vis_left, vis_right, vis(vis_left, vis_right));
 	while (*possibilities != NULL)
 	{
 		copy_possibilitie(solution, rowf, *possibilities);
-		//edu_fill_buffer(solution + (rowf + 1) * 5, (20 - rowf * 5), '*');
-		//solution[4] = '\n';
-		//solution[9] = '\n';
-		//solution[14] = '\n';
-		//solution[19] = '\n';
-		//write(1, solution, 20);
 
 		if (validate_solution(solution, rowf))
 		{
-			//write(1, "V\n\n", 3);
 			if (rowf >= 3)
 			{
 				if (verify_solution(solution, condicoes))
@@ -251,8 +243,8 @@ int main()
 	solution[9] = '\n';
 	solution[14] = '\n';
 	solution[19] = '\n';
-	//int condicoes[] = {4, 3, 2, 1, 1, 2, 2, 2, 4, 3, 2, 1, 1, 2, 2, 2};
-	int condicoes[] = {1,2,3,2,3,2,1,2,1,3,2,3,2,1,3,2};
+	int condicoes[] = {3,2,3,1,1,3,2,2,3,2,2,1,1,3,2,2};
+
 	find_solution(solution, condicoes, 0);
 }
 
