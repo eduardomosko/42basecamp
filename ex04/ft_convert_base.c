@@ -6,11 +6,16 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:29:38 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/10 19:27:59 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/11 02:56:40 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int					findchar(char c, char *str)
+#include <malloc.h>
+
+char			*ft_itoa_base(int nb, char *base);
+int				ft_get_int_base(char *base);
+
+int				find_char(char c, char *str)
 {
 	int i;
 
@@ -21,12 +26,12 @@ int					findchar(char c, char *str)
 	return (-1);
 }
 
-int					ft_atoi_base(char *str, char *base)
+int				ft_atoi_base(char *str, char *base)
 {
-	unsigned int	basen;
-	int				offset;
-	int				sign;
-	int				num;
+	int	basen;
+	int	offset;
+	int	sign;
+	int	num;
 
 	if ((basen = ft_get_int_base(base)) == -1)
 		return (0);
@@ -40,7 +45,7 @@ int					ft_atoi_base(char *str, char *base)
 		++str;
 	}
 	num = 0;
-	while ((offset = findchar(*str, base)) >= 0)
+	while ((offset = find_char(*str, base)) >= 0)
 	{
 		num *= basen;
 		num += sign * offset;
@@ -49,7 +54,7 @@ int					ft_atoi_base(char *str, char *base)
 	return (num);
 }
 
-char				*ft_convert_base(char *nbr, char *base_from, char *base_to)
+char			*ft_convert_base(char *nbr, char *base_from, char *base_to)
 {
 	if (nbr == NULL || base_from == NULL || base_to == NULL)
 		return (NULL);
