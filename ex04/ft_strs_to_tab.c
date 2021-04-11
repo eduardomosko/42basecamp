@@ -6,11 +6,12 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 20:56:23 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/11 21:13:37 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/11 21:17:32 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <malloc.h>
+#include "ft_stock_str.h"
 
 char				*ft_strdup(char *src)
 {
@@ -60,7 +61,7 @@ struct s_stock_str	*ft_strs_to_tab(int ac, char **av)
 {
 	struct s_stock_str *ret;
 
-	ret = malloc((ac + NULL) * sizeof(struct s_stock_str));
+	ret = malloc((ac + 1) * sizeof(struct s_stock_str));
 	if (ret == NULL)
 		return (NULL);
 	init_stock_str(&ret[ac], NULL);
