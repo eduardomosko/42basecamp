@@ -6,7 +6,7 @@
 /*   By: kdepetri <kdepetri@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 16:12:09 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/11 00:50:15 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/11 01:48:39 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,17 +182,17 @@ int		main(int argc, char *argv[])
 
 	if (argc == 2)
 	{
-		i = 0;
+		i = -1;
 		while (*argv[1] != '\0')
 		{
+			if (++i > 15)
+				return (write(1, "Error\n", 6) || 1);
 			condicoes[i] = *(argv[1])++ - '0';
+			(*argv[1] == ' ' && i < 15) && (argv[1]++);
 			if (!(1 <= condicoes[i] && condicoes[i] <= 4))
 				return (write(1, "Error\n", 6) || 1);
-			if (*argv[1] == ' ' && i < 15)
-				argv[1]++;
-			++i;
 		}
-		if (i != 16)
+		if (i != 15)
 			return (write(1, "Error\n", 6) || 1);
 		i = -1;
 		while (++i < 32)
