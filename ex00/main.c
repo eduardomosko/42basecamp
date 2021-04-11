@@ -6,7 +6,7 @@
 /*   By: kdepetri <kdepetri@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 16:12:09 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/11 01:48:39 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/11 16:08:19 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,60 +145,113 @@ int		is_solved(char *board, int *condicoes)
 **  0 0 0 0\n
 */
 
-int		find_board(char *board, int *condicoes, int rowf)
+int		get_expected_view(int *views, int index, int num)
+{
+	return (views[index * 4 + num]);
+}
+
+char	**get_possible_lines(char ***tree, int view_left, int view_right)
+{
+	return g_tree[(4 * (vis_left - 1) + (vis_right - 1))];;
+}
+
+int		solve_board(char *board, int *views, int rowf)
 {
 	int				temp;
 	int				vis_left;
 	int				vis_right;
 	const char		**possibilities;
 
-	vis_left = condicoes[(2 * 4) + rowf];
-	vis_right = condicoes[(3 * 4) + rowf];
-	possibilities = g_tree[(4 * (vis_left - 1) + (vis_right - 1))];
-	while (*possibilities != NULL)
+	view_left = get_expected_view(views, 2, rowf);
+	view_right = get_expected_view(views, 3, rowf);
+	lines_to_test = get_possible_lines(g_tree, view_left, view_right);
+	while (*lines_to_test != NULL)
 	{
 		temp = -1;
 		while (++temp < 4)
 			board[(temp * 2) + (rowf * 8)] = (*possibilities)[temp];
+
+
 		if (validate_board(board, rowf))
 		{
 			if (rowf >= 3)
-				if (is_solved(board, condicoes))
-					return (write(1, board, 32) || 1);
-			if (rowf < 3)
-				if ((temp = find_board(board, condicoes, rowf + 1)))
+			{
+				if (is_solved(board, views))
+					return (0);
+			}
+			else
+			{
+				if ((temp = solve_board(board, condicoes, rowf + 1)) == 0)
 					return (temp);
+			}
 		}
 		++possibilities;
 	}
 	return ((rowf == 0 && write(1, "Error\n", 6)) && 0);
 }
 
+int		read_arguments(int *views, char *str)
+{
+	int		i;
+
+	i = 0;
+	while (*str != '\0')
+	{
+		if (i > 15)
+			return (1);
+		views[i] = *str++ - '0';
+		if (views[i] < 1 || views[i] > 4)
+			return (1);
+		if (*str == ' ' && i < 15)
+			++str;
+		++i;
+	}
+	if (i != 16)
+	{
+		write(1, "Error\n", 6);
+		return (1);
+	}
+
+	return (0);
+}
+
+void	init_board(char *board)
+{
+	int i;
+
+	i = -1;
+	while (++i < 32)
+	{
+		if ((i + 1) % 8 == 0)
+			board[i] = '\n';
+		else
+			board[i] = ' ';
+	}
+}
+
 int		main(int argc, char *argv[])
 {
 	char	board[32];
-	int		condicoes[16];
-	int		i;
+	int		views[16];
 
 	if (argc == 2)
 	{
-		i = -1;
-		while (*argv[1] != '\0')
+		if (read_arguments(views, argv[1]) != 0)
 		{
-			if (++i > 15)
-				return (write(1, "Error\n", 6) || 1);
-			condicoes[i] = *(argv[1])++ - '0';
-			(*argv[1] == ' ' && i < 15) && (argv[1]++);
-			if (!(1 <= condicoes[i] && condicoes[i] <= 4))
-				return (write(1, "Error\n", 6) || 1);
+			write(1, "Error\n", 6);
+			return (1);
 		}
-		if (i != 15)
-			return (write(1, "Error\n", 6) || 1);
-		i = -1;
-		while (++i < 32)
-			board[i] = ((i + 1) % 8 == 0) ? '\n' : ' ';
-		find_board(board, condicoes, 0);
+		init_board(board);
+		if (solve_board(board, views, 0) != 0)
+		{
+			write(1, "Error\n", 6);
+			return (3);
+		}
 	}
 	else
+	{
 		write(1, "Error\n", 6);
+		return (2);
+	}
+	return (0);
 }
