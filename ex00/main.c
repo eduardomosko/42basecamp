@@ -6,10 +6,11 @@
 /*   By: kdepetri <kdepetri@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 16:12:09 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/10 22:55:17 by kdepetri         ###   ########.fr       */
+/*   Updated: 2021/04/11 00:50:15 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <malloc.h>
 #include <unistd.h>
 
@@ -23,7 +24,7 @@ const char *g_a13[] = {"4312", "4231", "4132", NULL};
 const char *g_a14[] = {"4321", NULL};
 
 const char *g_a21[] = {"3214", "3124", NULL};
-const char *g_a22[] = {"2143", "2413", "1423", "3142", "3241", "3421", NULL};
+const char *g_a22[] = {"2143", "2413", "1423", "3142", "3241", "3412", NULL};
 const char *g_a23[] = {"3421", "2431", "1432", NULL};
 const char *g_a24[] = {NULL};
 
@@ -79,25 +80,25 @@ int		validate_board(char *board, int until)
 {
 	int pos[4];
 	int index;
-	int i;
-	int j;
+	int row;
+	int col;
 	int z;
 
-	j = 0;
-	while (j < 4)
+	col = 0;
+	while (col < 4)
 	{
-		i = 0;
+		row = 0;
 		z = -1;
 		while (++z < 4)
 			pos[z] = 0;
-		while (i < until + 1)
+		while (row < until + 1)
 		{
-			index = board[i * 5 + j] - '1';
+			index = board[(row * 8) + (col * 2)] - '1';
 			if (pos[index]++)
 				return (0);
-			++i;
+			++row;
 		}
-		++j;
+		++col;
 	}
 	return (1);
 }
@@ -116,7 +117,7 @@ int		is_solved(char *board, int *condicoes)
 		j = 0;
 		while (j < 4)
 		{
-			col[j] = board[i + 5 * j];
+			col[j] = board[(i * 2) + (8 * j)];
 			++j;
 		}
 		vis_up = condicoes[i];
@@ -138,10 +139,10 @@ int		is_solved(char *board, int *condicoes)
 **  row1right row2right row3right row4right
 **
 ** Solução
-**  0000\n
-**  0000\n
-**  0000\n
-**  0000\n
+**  0 0 0 0\n
+**  0 0 0 0\n
+**  0 0 0 0\n
+**  0 0 0 0\n
 */
 
 int		find_board(char *board, int *condicoes, int rowf)
@@ -158,12 +159,12 @@ int		find_board(char *board, int *condicoes, int rowf)
 	{
 		temp = -1;
 		while (++temp < 4)
-			board[temp + rowf * 5] = (*possibilities)[temp];
+			board[(temp * 2) + (rowf * 8)] = (*possibilities)[temp];
 		if (validate_board(board, rowf))
 		{
 			if (rowf >= 3)
 				if (is_solved(board, condicoes))
-					return (write(1, board, 20) || 1);
+					return (write(1, board, 32) || 1);
 			if (rowf < 3)
 				if ((temp = find_board(board, condicoes, rowf + 1)))
 					return (temp);
@@ -173,14 +174,31 @@ int		find_board(char *board, int *condicoes, int rowf)
 	return ((rowf == 0 && write(1, "Error\n", 6)) && 0);
 }
 
-int		main()
+int		main(int argc, char *argv[])
 {
-	char board[20];
-	board[4] = '\n';
-	board[9] = '\n';
-	board[14] = '\n';
-	board[19] = '\n';
-	int condicoes[] = {3,2,3,1,1,3,2,2,3,2,2,1,1,3,2,2};
+	char	board[32];
+	int		condicoes[16];
+	int		i;
 
-	find_board(board, condicoes, 0);
+	if (argc == 2)
+	{
+		i = 0;
+		while (*argv[1] != '\0')
+		{
+			condicoes[i] = *(argv[1])++ - '0';
+			if (!(1 <= condicoes[i] && condicoes[i] <= 4))
+				return (write(1, "Error\n", 6) || 1);
+			if (*argv[1] == ' ' && i < 15)
+				argv[1]++;
+			++i;
+		}
+		if (i != 16)
+			return (write(1, "Error\n", 6) || 1);
+		i = -1;
+		while (++i < 32)
+			board[i] = ((i + 1) % 8 == 0) ? '\n' : ' ';
+		find_board(board, condicoes, 0);
+	}
+	else
+		write(1, "Error\n", 6);
 }
