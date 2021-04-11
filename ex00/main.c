@@ -6,7 +6,7 @@
 /*   By: kdepetri <kdepetri@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/10 16:12:09 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/11 16:08:19 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/11 17:10:29 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ const char **g_tree[] =
 	g_a41, g_a42, g_a43, g_a44
 };
 
+typedef enum	e_view
+{
+	VIEW_UP=0, VIEW_DOWN=1, VIEW_LEFT=2, VIEW_RIGHT=3
+}				t_view;
+
 /*
 ** Calcula quantas caixas são visíveis
 **
@@ -53,16 +58,18 @@ const char **g_tree[] =
 ** partindo da direção definida por dir.
 */
 
-int		count_visible(char *array, int dir)
+int		count_visible(char *array, t_view view)
 {
 	int count;
 	int max;
 	int i;
 	int end;
+	int dir;
 
 	count = 0;
 	max = 0;
-	i = dir > 0 ? 0 : 3;
+	dir = (view == VIEW_UP || view == VIEW_LEFT) ? 1 : -1;
+	i =  dir > 0 ? 0 : 3;
 	end = dir > 0 ? 4 : -1;
 	while (i != end)
 	{
@@ -76,22 +83,30 @@ int		count_visible(char *array, int dir)
 	return (count);
 }
 
+void	zero_buffer(void *mem, unsigned int size)
+{
+	char			*buffer;
+	unsigned int	i;
+
+	i = 0;
+	buffer = mem;
+	while (i < size)
+		buffer[i++] = 0;
+}
+
 int		validate_board(char *board, int until)
 {
 	int pos[4];
 	int index;
 	int row;
 	int col;
-	int z;
 
 	col = 0;
 	while (col < 4)
 	{
 		row = 0;
-		z = -1;
-		while (++z < 4)
-			pos[z] = 0;
-		while (row < until + 1)
+		zero_buffer(pos, 4 * sizeof(int));
+		while (row <= until)
 		{
 			index = board[(row * 8) + (col * 2)] - '1';
 			if (pos[index]++)
@@ -103,13 +118,19 @@ int		validate_board(char *board, int until)
 	return (1);
 }
 
-int		is_solved(char *board, int *condicoes)
+
+int		get_expected_view(const int *views, t_view view, int num)
+{
+	return (views[view * 4 + num]);
+}
+
+int		is_solved(char *board, const int *views)
 {
 	char	col[4];
+	int		vis_down;
+	int		vis_up;
 	int		i;
 	int		j;
-	int		vis_up;
-	int		vis_down;
 
 	i = 0;
 	while (i < 4)
@@ -120,11 +141,11 @@ int		is_solved(char *board, int *condicoes)
 			col[j] = board[(i * 2) + (8 * j)];
 			++j;
 		}
-		vis_up = condicoes[i];
-		vis_down = condicoes[4 + i];
-		if (vis_up != count_visible(col, 1))
+		vis_up = get_expected_view(views, VIEW_UP, i);
+		vis_down = get_expected_view(views, VIEW_DOWN, i);
+		if (vis_up != count_visible(col, VIEW_UP))
 			return (0);
-		if (vis_down != count_visible(col, -1))
+		if (vis_down != count_visible(col, VIEW_DOWN))
 			return (0);
 		++i;
 	}
@@ -145,33 +166,32 @@ int		is_solved(char *board, int *condicoes)
 **  0 0 0 0\n
 */
 
-int		get_expected_view(int *views, int index, int num)
+const char	**get_possible_lines(int view_left, int view_right)
 {
-	return (views[index * 4 + num]);
+	return (g_tree[(4 * (view_left - 1) + (view_right - 1))]);
 }
 
-char	**get_possible_lines(char ***tree, int view_left, int view_right)
+void	copy_line(char *board, const char *line, int row)
 {
-	return g_tree[(4 * (vis_left - 1) + (vis_right - 1))];;
+	int n;
+
+	n = -1;
+	while (++n < 4)
+		board[(n * 2) + (row * 8)] = line[n];
 }
 
-int		solve_board(char *board, int *views, int rowf)
+int		solve_board(char *board, const int *views, int rowf)
 {
-	int				temp;
-	int				vis_left;
-	int				vis_right;
-	const char		**possibilities;
+	int				view_left;
+	int				view_right;
+	const char		**lines_to_test;
 
-	view_left = get_expected_view(views, 2, rowf);
-	view_right = get_expected_view(views, 3, rowf);
-	lines_to_test = get_possible_lines(g_tree, view_left, view_right);
+	view_left = get_expected_view(views, VIEW_LEFT, rowf);
+	view_right = get_expected_view(views, VIEW_RIGHT, rowf);
+	lines_to_test = get_possible_lines(view_left, view_right);
 	while (*lines_to_test != NULL)
 	{
-		temp = -1;
-		while (++temp < 4)
-			board[(temp * 2) + (rowf * 8)] = (*possibilities)[temp];
-
-
+		copy_line(board, *lines_to_test, rowf);
 		if (validate_board(board, rowf))
 		{
 			if (rowf >= 3)
@@ -181,16 +201,16 @@ int		solve_board(char *board, int *views, int rowf)
 			}
 			else
 			{
-				if ((temp = solve_board(board, condicoes, rowf + 1)) == 0)
-					return (temp);
+				if (solve_board(board, views, rowf + 1) == 0)
+					return (0);
 			}
 		}
-		++possibilities;
+		++lines_to_test;
 	}
-	return ((rowf == 0 && write(1, "Error\n", 6)) && 0);
+	return (1);
 }
 
-int		read_arguments(int *views, char *str)
+int		read_arguments(int *views, const char *str)
 {
 	int		i;
 
@@ -199,18 +219,16 @@ int		read_arguments(int *views, char *str)
 	{
 		if (i > 15)
 			return (1);
-		views[i] = *str++ - '0';
+		views[i] = *str - '0';
 		if (views[i] < 1 || views[i] > 4)
 			return (1);
+		++str;
 		if (*str == ' ' && i < 15)
 			++str;
 		++i;
 	}
 	if (i != 16)
-	{
-		write(1, "Error\n", 6);
 		return (1);
-	}
 
 	return (0);
 }
@@ -242,7 +260,12 @@ int		main(int argc, char *argv[])
 			return (1);
 		}
 		init_board(board);
-		if (solve_board(board, views, 0) != 0)
+		if (solve_board(board, views, 0) == 0)
+		{
+			write(1, board, 32);
+			return (0);
+		}
+		else
 		{
 			write(1, "Error\n", 6);
 			return (3);
@@ -253,5 +276,5 @@ int		main(int argc, char *argv[])
 		write(1, "Error\n", 6);
 		return (2);
 	}
-	return (0);
+	return (-1);
 }
