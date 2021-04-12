@@ -6,11 +6,12 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 13:01:48 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/12 20:09:05 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/12 20:52:27 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdio.h>
 
 unsigned int	edu_joined_size(int size, char **strs, char *sep)
 {
@@ -18,15 +19,26 @@ unsigned int	edu_joined_size(int size, char **strs, char *sep)
 	unsigned int	offset;
 	int				i;
 
-	i = -1;
-	offset = 0;
+	if (size < 1)
+		return (1);
+	i = 0;
 	total_size = 0;
-	while (++i < size)
+	while (i < size)
+	{
+		offset = 0;
 		while (strs[i][offset] != '\0')
-			++total_size && ++offset;
+		{
+			++total_size;
+			++offset;
+		}
+		++i;
+	}
 	i = 0;
 	while (*sep != '\0')
-		++sep && ++i;
+	{
+		++sep;
+		++i;
+	}
 	return (total_size + ((size - 1) * i) + 1);
 }
 
@@ -38,7 +50,8 @@ char			*ft_strjoin(int size, char **strs, char *sep)
 	char			*itsep;
 	int				i;
 
-	if ((ret = malloc(edu_joined_size(size, strs, sep))) == NULL)
+	ret = malloc(edu_joined_size(size, strs, sep));
+	if (ret == NULL)
 		return (NULL);
 	i = -1;
 	itstr = ret;
@@ -47,7 +60,7 @@ char			*ft_strjoin(int size, char **strs, char *sep)
 		offset = 0;
 		while (strs[i][offset] != '\0')
 			*itstr++ = strs[i][offset++];
-		if (i != size - 1)
+		if (i < size - 1)
 		{
 			itsep = sep;
 			while (*itsep != '\0')
