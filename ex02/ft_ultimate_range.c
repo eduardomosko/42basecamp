@@ -6,11 +6,11 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 04:47:46 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/08 05:02:40 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/12 20:08:34 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <malloc.h>
+#include <stdlib.h>
 
 int	ft_ultimate_range(int **range, int min, int max)
 {

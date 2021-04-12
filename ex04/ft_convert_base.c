@@ -6,11 +6,11 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:29:38 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/11 02:56:40 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/12 20:10:11 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <malloc.h>
+#include <stdlib.h>
 
 char			*ft_itoa_base(int nb, char *base);
 int				ft_get_int_base(char *base);

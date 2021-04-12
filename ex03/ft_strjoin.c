@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/08 13:01:48 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/09 20:46:00 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/12 20:09:05 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ char			*ft_strjoin(int size, char **strs, char *sep)
 	char			*itsep;
 	int				i;
 
-	if ((ret = malloc(edu_joined_size(size, strs, sep))) == 0)
-		return (0);
+	if ((ret = malloc(edu_joined_size(size, strs, sep))) == NULL)
+		return (NULL);
 	i = -1;
 	itstr = ret;
 	while (++i < size)

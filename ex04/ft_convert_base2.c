@@ -6,11 +6,11 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/09 21:57:36 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/11 02:57:20 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/12 20:10:23 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <malloc.h>
+#include <stdlib.h>
 
 int				ft_get_int_base(char *base)
 {

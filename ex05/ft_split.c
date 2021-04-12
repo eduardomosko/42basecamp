@@ -6,11 +6,11 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 03:27:59 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/11 13:37:31 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/12 20:10:35 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <malloc.h>
+#include <stdlib.h>
 
 int					is_separator(char c, char *charset)
 {
