@@ -6,16 +6,12 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 21:15:24 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/12 13:11:58 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/12 13:45:47 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-typedef struct	s_stock_str
-{
-	int size;
-	char* str;
-	char* copy;
-}				t_stock_str;
+#include <unistd.h>
+#include "ft_stock_str.h"
 
 void	ft_putnbr(int nb)
 {

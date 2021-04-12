@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 20:56:23 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/11 21:17:32 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/12 13:40:09 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ unsigned int		ft_strlen(char *str)
 
 	n = 0;
 	while (*str)
-		++n;
+		++str && ++n;
 	return (n);
 }
 
