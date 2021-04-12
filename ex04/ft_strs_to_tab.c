@@ -6,11 +6,11 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 20:56:23 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/12 13:40:09 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/12 20:11:35 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <malloc.h>
+#include <stdlib.h>
 #include "ft_stock_str.h"
 
 char				*ft_strdup(char *src)
