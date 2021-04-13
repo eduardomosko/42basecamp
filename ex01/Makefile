@@ -1,6 +1,6 @@
 .PHONY: clean all fclean re
 
-objects=ft_putchar.o ft_swap.o ft_putstr.o ft_strlen.o ft_strcmp.o
+objects=srcs/ft_putchar.o srcs/ft_swap.o srcs/ft_putstr.o srcs/ft_strlen.o srcs/ft_strcmp.o
 files=libft.a $(objects)
 
 all: libft.a
@@ -16,6 +16,6 @@ re: fclean all
 libft.a: $(objects)
 	ar rcs $@ $^
 
-%.o: %.c
-	gcc -Wall -Wextra -Werror $< -c -o $@
+srcs/%.o: srcs/%.c
+	gcc -Wall -Wextra -Werror $< -c -o $@ -I./includes
 
