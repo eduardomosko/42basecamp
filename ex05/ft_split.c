@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/11 03:27:59 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/12 20:10:35 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/13 20:31:22 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,7 @@ unsigned int		count_substrings(char *str, char *charset)
 
 	n = 0;
 	if (is_separator(*str, charset))
-	{
 		str = next_substring(str, charset);
-		n = -1;
-	}
 	while (*str != '\0')
 	{
 		str = next_substring(str, charset);
