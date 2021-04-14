@@ -6,13 +6,13 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 14:57:17 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/14 14:58:52 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/14 19:18:24 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-int	*ft_map(int *tab, int length, int(*f)(int))
+int	*ft_map(int *tab, int length, int (*f)(int))
 {
 	int *ret;
 

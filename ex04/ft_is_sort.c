@@ -6,11 +6,11 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 18:48:12 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/14 18:55:06 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/14 19:20:06 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_is_sort(int *tab, int length, int(*f)(int, int))
+int	ft_is_sort(int *tab, int length, int (*f)(int, int))
 {
 	int i;
 
