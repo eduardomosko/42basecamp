@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 23:17:20 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/14 23:43:28 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/15 02:33:33 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_strcpy(char *dest, const char *src)
 	return (ret);
 }
 
-int	ft_strlen(const char *str)
+int		ft_strlen(const char *str)
 {
 	int n;
 
@@ -45,7 +45,7 @@ void	ft_putstr(const char *str)
 	write(1, str, n);
 }
 
-int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
+int		ft_strncmp(const char *s1, const char *s2, unsigned int n)
 {
 	unsigned int i;
 
@@ -61,7 +61,7 @@ int	ft_strncmp(const char *s1, const char *s2, unsigned int n)
 	return (((int)(unsigned char)*s1) - ((int)(unsigned char)*s2));
 }
 
-int	ft_strcmp(const char *s1, const char *s2)
+int		ft_strcmp(const char *s1, const char *s2)
 {
 	while (*s1 != '\0' && *s2 != '\0' && *s1 == *s2)
 	{

@@ -1,6 +1,6 @@
 .PHONY: all clean fclean
 
-OBJECTS = main.o errors.o files.o ft_string.o buffer.o
+OBJECTS = main.o errors.o files.o ft_string.o buffer.o arg_parse.o
 NAME = ft_tail
 
 all: $(NAME)
