@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 02:35:37 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/15 02:39:43 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/15 03:25:05 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*g_bytes_buffer;
 size_t		read_bytes(char *str)
 {
 	unsigned int	i;
-	size_t 			num;
+	size_t			num;
 
 	i = 0;
 	num = 0;
@@ -112,4 +112,3 @@ void		parse_args(int c, char **args)
 	else
 		g_show_header = 0;
 }
-
