@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 03:47:03 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/15 00:40:43 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/15 00:50:34 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,10 @@
 
 ssize_t	g_bytes_to_read;
 int		g_file_count;
+int		g_show_header;
 char	**g_files;
 char	*g_program_name;
+char	*g_bytes_buffer;
 
 ssize_t		read_bytes(char *str)
 {
@@ -72,15 +74,20 @@ void		get_bytes_to_read(int c, char **args)
 
 void		get_files_to_read(int c, char **args)
 {
-	int flag;
+	int add_stdin;
 	int i;
 
 	i = 0;
-	flag = 0;
+	add_stdin = 0;
 	g_file_count = 0;
 	while (i < c)
 		if (args[i++] != NULL)
 			++g_file_count;
+	if (g_file_count == 0)
+	{
+		++g_file_count;
+		add_stdin = 1;
+	}
 	if ((g_files = malloc(g_file_count * sizeof(char*))) == NULL)
 	{
 		show_errno();
@@ -90,6 +97,8 @@ void		get_files_to_read(int c, char **args)
 	while (i && c)
 		if (args[--c] != NULL)
 			g_files[--i] = args[c];
+	if (add_stdin)
+		g_files[0] = "-";
 }
 
 void		parse_args(int c, char **args)
@@ -97,6 +106,16 @@ void		parse_args(int c, char **args)
 	g_program_name = basename(args[0]);
 	get_bytes_to_read(c - 1, args + 1);
 	get_files_to_read(c - 1, args + 1);
+	if (g_file_count > 1)
+		g_show_header = 1;
+	else
+		g_show_header = 0;
+}
+
+void		do_global_cleanup(void)
+{
+	free(g_files);
+	free(g_bytes_buffer);
 }
 
 /*
@@ -120,10 +139,12 @@ int			main(int argc, char *argv[])
 			show_file_error(g_files[i]);
 		else
 		{
-			show_header(g_files[i]);
+			if (g_show_header)
+				show_header(g_files[i]);
 			tail_fd(fd);
 			discard_fd(fd);
 		}
 		++i;
 	}
+	do_global_cleanup();
 }
