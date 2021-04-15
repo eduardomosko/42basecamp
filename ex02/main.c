@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 03:47:03 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/15 02:40:22 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/15 03:03:03 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include <stdlib.h>
 
 extern int	g_show_header;
-extern char	**g_files;
 extern int	g_file_count;
 extern char	*g_bytes_buffer;
+extern char	**g_files;
 
 void		do_global_cleanup(void)
 {
@@ -46,7 +46,7 @@ int			main(int argc, char *argv[])
 		else
 		{
 			if (g_show_header)
-				show_header(g_files[i]);
+				show_header(g_files[i], (i != 0));
 			tail_fd(fd);
 			discard_fd(fd);
 		}

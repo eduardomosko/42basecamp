@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 04:33:18 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/15 02:39:15 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/15 03:03:40 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 int				get_fd(const char *filename);
 int				discard_fd(int fd);
-void			show_header(const char *filename);
+void			show_header(const char *filename, int print_newline);
 int				tail_fd(int fd);
 
 /*

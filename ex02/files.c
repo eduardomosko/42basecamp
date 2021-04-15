@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 04:32:40 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/15 02:43:10 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/15 03:02:38 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ char			g_buffer[READ_SIZE];
 ** Write the file header to stdout
 */
 
-void	show_header(const char *filename)
+void	show_header(const char *filename, int print_newline)
 {
+	if (print_newline)
+		ft_putstr("\n");
 	ft_putstr("==> ");
 	if (ft_strcmp("-", filename) == 0)
 	{
