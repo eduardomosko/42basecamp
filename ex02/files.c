@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 04:32:40 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/15 03:02:38 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/15 16:32:09 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 #define READ_SIZE 1024
 
-extern ssize_t	g_bytes_to_read;
+extern size_t	g_bytes_to_read;
 extern char		*g_bytes_buffer;
 extern int		g_file_count;
 extern char		**g_files;
@@ -50,16 +50,22 @@ void	show_header(const char *filename, int print_newline)
 int		tail_fd(int fd)
 {
 	ssize_t	bytes_read;
+	size_t	total_bytes_read;
 
 	if (fd < 0)
 	{
 		return (1);
 	}
+	total_bytes_read = 0;
 	while ((bytes_read = read(fd, g_buffer, READ_SIZE)) > 0)
 	{
+		total_bytes_read += bytes_read;
 		tail_buffer(g_bytes_buffer, g_bytes_to_read, g_buffer, bytes_read);
 	}
-	write(1, g_bytes_buffer, g_bytes_to_read);
+	if (total_bytes_read < g_bytes_to_read)
+		write(1, g_bytes_buffer + g_bytes_to_read - total_bytes_read, total_bytes_read);
+	else
+		write(1, g_bytes_buffer, g_bytes_to_read);
 	return (0);
 }
 
