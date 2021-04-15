@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:50:58 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/15 18:54:15 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/15 19:25:50 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void		ft_sort_string_arr(char **arr, unsigned int size)
 	}
 }
 
-void	ft_sort_string_tab(char **tab)
+void		ft_sort_string_tab(char **tab)
 {
 	unsigned int size;
 

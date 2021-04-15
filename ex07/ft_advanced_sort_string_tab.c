@@ -6,11 +6,12 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 18:50:58 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/15 19:16:31 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/15 19:26:27 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void		ft_sort_string_arr(char **arr, unsigned int size, int (*cmp)(char*, char*))
+void		ft_sort_string_arr(char **arr, unsigned int size,
+		int (*cmp)(char*, char*))
 {
 	unsigned int	i;
 	unsigned int	max_pos;
@@ -33,7 +34,7 @@ void		ft_sort_string_arr(char **arr, unsigned int size, int (*cmp)(char*, char*)
 	}
 }
 
-void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char*, char*))
+void		ft_advanced_sort_string_tab(char **tab, int (*cmp)(char*, char*))
 {
 	unsigned int size;
 
