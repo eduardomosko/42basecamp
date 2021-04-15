@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 03:47:03 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/15 00:50:34 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/15 02:28:34 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ char	**g_files;
 char	*g_program_name;
 char	*g_bytes_buffer;
 
-ssize_t		read_bytes(char *str)
+size_t		read_bytes(char *str)
 {
 	unsigned int	i;
-	ssize_t 		num;
+	size_t 			num;
 
 	i = 0;
 	num = 0;
 	while ('0' <= str[i] && str[i] <= '9')
 	{
 		num *= 10;
-		num += *str - '0';
+		num += str[i] - '0';
 		++i;
 	}
 	if (str[i] != '\0')
@@ -70,6 +70,7 @@ void		get_bytes_to_read(int c, char **args)
 		}
 		++i;
 	}
+	g_bytes_buffer = malloc(g_bytes_to_read);
 }
 
 void		get_files_to_read(int c, char **args)

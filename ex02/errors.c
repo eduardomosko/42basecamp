@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 04:30:57 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/15 00:41:33 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/15 02:17:17 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	show_file_error(const char *filename)
 	char		*strerr;
 
 	ft_putstr(g_program_name);
-	ft_putstr(": ");
+	ft_putstr(": cannot open '");
 	ft_putstr(filename);
-	ft_putstr(": ");
+	ft_putstr("' for reading: ");
 	strerr = strerror(errno);
 	ft_putstr(strerr);
 	ft_putstr("\n");

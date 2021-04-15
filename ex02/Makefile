@@ -1,17 +1,17 @@
 .PHONY: all clean fclean
 
-objects = main.o errors.o files.o ft_string.o
-binary = ft_tail
+OBJECTS = main.o errors.o files.o ft_string.o buffer.o
+NAME = ft_tail
 
-all: ft_tail
+all: $(NAME)
 
 clean:
-	-rm -f $(objects)
+	-rm -f $(OBJECTS)
 
 fclean:
-	-rm -f $(binary) $(objects)
+	-rm -f $(NAME) $(OBJECTS)
 
-ft_tail: $(objects)
+$(NAME): $(OBJECTS)
 	gcc -Wall -Werror -Wextra $^ -o $@
 
 %.o: %.c

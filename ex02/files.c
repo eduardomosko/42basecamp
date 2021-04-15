@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 04:32:40 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/14 23:51:51 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/15 02:22:29 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #define READ_SIZE 1024
 
 extern ssize_t	g_bytes_to_read;
+extern char		*g_bytes_buffer;
 extern int		g_file_count;
 extern char		**g_files;
 extern char		*g_program_name;
@@ -28,16 +29,16 @@ char			g_buffer[READ_SIZE];
 
 void	show_header(const char *filename)
 {
-	write(1, "===> ", 5);
+	ft_putstr("==> ");
 	if (ft_strcmp("-", filename) == 0)
 	{
-		write(1, "standard input", 14);
+		ft_putstr("standard input");
 	}
 	else
 	{
 		ft_putstr(filename);
 	}
-	write(1, " <===\n", 6);
+	ft_putstr(" <==\n");
 }
 
 /*
@@ -52,10 +53,11 @@ int		tail_fd(int fd)
 	{
 		return (1);
 	}
-	while ((bytes_read = read(fd, g_buffer, READ_SIZE)) != 0)
+	while ((bytes_read = read(fd, g_buffer, READ_SIZE)) > 0)
 	{
-		write(1, g_buffer, bytes_read);
+		tail_buffer(g_bytes_buffer, g_bytes_to_read, g_buffer, bytes_read);
 	}
+	write(1, g_bytes_buffer, g_bytes_to_read);
 	return (0);
 }
 
