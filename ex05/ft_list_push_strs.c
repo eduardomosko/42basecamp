@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 19:43:53 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/16 04:41:08 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/16 09:48:07 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	ft_list_push_front(t_list **begin_list, void *data)
 
 t_list	*ft_list_push_strs(int size, char **strs)
 {
-	t_list *ret;
-	int i;
+	t_list	*ret;
+	int		i;
 
 	i = 0;
 	ret = 0;

@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 20:00:00 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/16 05:19:46 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/16 09:48:30 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_list_put_front(t_list **begin_list, t_list *list)
 {
-
 	if (begin_list == 0)
 		return ;
 	list->next = *begin_list;
