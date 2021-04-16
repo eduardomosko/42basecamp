@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/15 02:35:37 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/16 21:04:12 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/16 22:04:36 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ void		get_files_to_read(int c, char **args)
 		if (args[i++] != NULL)
 			++g_file_count;
 	if (g_file_count == 0)
-	{
-		++g_file_count;
-		add_stdin = 1;
-	}
+		return ;
 	if ((g_files = malloc(g_file_count * sizeof(char*))) == NULL)
 	{
 		show_errno();
@@ -65,8 +62,6 @@ void		get_files_to_read(int c, char **args)
 	while (i && c)
 		if (args[--c] != NULL)
 			g_files[--i] = args[c];
-	if (add_stdin)
-		g_files[0] = "-";
 }
 
 void		parse_args(int c, char **args)

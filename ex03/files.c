@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 04:32:40 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/16 21:42:43 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/16 22:08:34 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,11 @@
 
 #define READ_SIZE 16
 
-extern int		g_file_count;
-extern char		**g_files;
-extern char		*g_program_name;
-int				g_file_pos;
 char			g_buffer[READ_SIZE];
 char			g_buffer1[16];
+int				g_file_pos = 0;
 int				g_is_repeating = 0;
-size_t			g_buffer_bytes_read = 0;
-
+int				g_buffer_bytes_read = 0;
 
 void	ft_print_memory(void *addr, unsigned int size)
 {
@@ -35,7 +31,8 @@ void	ft_print_memory(void *addr, unsigned int size)
 	while (printed < size)
 	{
 		to_print = size - printed > 16 ? 16 : size - printed;
-		if (buffer_eq(&addr[printed], g_buffer1, to_print) && to_print == READ_SIZE && g_file_pos != 0)
+		if (buffer_eq(&addr[printed], g_buffer1, to_print) &&
+				to_print == READ_SIZE && g_file_pos != 0)
 		{
 			if (!g_is_repeating)
 				ft_putstr("*\n");
@@ -53,11 +50,12 @@ void	ft_print_memory(void *addr, unsigned int size)
 	}
 }
 
-void	show_file(fd)
+void	show_file(int fd)
 {
-	ssize_t		bytes_read;
+	int			bytes_read;
 
-	while ((bytes_read = read(fd, g_buffer + g_buffer_bytes_read, READ_SIZE - g_buffer_bytes_read)) > 0)
+	while ((bytes_read = read(fd, g_buffer + g_buffer_bytes_read,
+					READ_SIZE - g_buffer_bytes_read)) > 0)
 	{
 		g_buffer_bytes_read += bytes_read;
 		if (g_buffer_bytes_read % 16 == 0)
@@ -79,14 +77,14 @@ void	show_all_files(int c, char **files)
 	g_buffer_bytes_read = 0;
 	while (i < c)
 	{
-		if ((fd = get_fd(files[i])) == -1)
+		if ((fd = open(files[i], O_RDONLY)) == -1)
 		{
 			show_file_error(files[i++]);
 			continue ;
 		}
 		show_file(fd);
 		shown_any = 1;
-		discard_fd(fd);
+		close(fd);
 		++i;
 	}
 	if (shown_any)
@@ -95,14 +93,4 @@ void	show_all_files(int c, char **files)
 		g_print_filepos(g_file_pos);
 		ft_putstr("\n");
 	}
-}
-
-int		get_fd(const char *filename)
-{
-	return (open(filename, O_RDONLY));
-}
-
-int		discard_fd(int fd)
-{
-	return (close(fd));
 }
