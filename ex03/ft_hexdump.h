@@ -6,12 +6,12 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 04:33:18 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/16 19:42:00 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/16 21:02:44 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_TAIL_H
-# define FT_TAIL_H
+#ifndef FT_HEXDUMP_H
+# define FT_HEXDUMP_H
 
 # include <unistd.h>
 
@@ -25,6 +25,12 @@ void			show_header(const char *filename, int print_newline);
 int				show_fd(int fd);
 void			flush_buffer(char *buffer, size_t s);
 void			show_all_files(int c, char **files);
+
+void			edu_print_filepos_c(size_t fp);
+void			print_file_line_c(char *addr, size_t to_print);
+
+void			edu_print_filepos_default(size_t fp);
+void			print_file_line_default(char *addr, size_t to_print);
 
 /*
 ** Shows adequate error messages

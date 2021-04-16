@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 04:32:40 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/16 20:23:36 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/16 21:03:49 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,13 @@
 extern int		g_file_count;
 extern char		**g_files;
 extern char		*g_program_name;
-extern void		(*g_write_buffer)();
 int				g_file_pos;
 char			g_buffer[READ_SIZE];
 char			g_buffer1[16];
 int				g_is_repeating = 0;
+
+void			(*g_print_line)(char*, size_t) = print_file_line_default;
+void			(*g_print_filepos)(size_t) = edu_print_filepos_default;
 
 /*
 ** Write the last bytes of file fd to stdout
@@ -123,9 +125,6 @@ void	print_file_line_default(char *addr, size_t to_print)
 	edu_print_filepos_default(g_file_pos);
 	edu_print_mem_hex_default(addr, to_print);
 }
-
-void			(*g_print_line)(char*, size_t) = print_file_line_default;
-void			(*g_print_filepos)(size_t) = edu_print_filepos_default;
 
 void	*ft_print_memory(void *addr, unsigned int size)
 {
