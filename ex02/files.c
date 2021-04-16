@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 04:32:40 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/15 16:32:09 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/16 22:17:43 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int		tail_fd(int fd)
 		tail_buffer(g_bytes_buffer, g_bytes_to_read, g_buffer, bytes_read);
 	}
 	if (total_bytes_read < g_bytes_to_read)
-		write(1, g_bytes_buffer + g_bytes_to_read - total_bytes_read, total_bytes_read);
+		write(1, g_bytes_buffer + g_bytes_to_read - total_bytes_read,
+				total_bytes_read);
 	else
 		write(1, g_bytes_buffer, g_bytes_to_read);
 	return (0);
