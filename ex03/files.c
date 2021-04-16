@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 04:32:40 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/16 22:08:34 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/16 22:13:20 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void	show_all_files(int c, char **files)
 
 	i = 0;
 	shown_any = 0;
-	g_buffer_bytes_read = 0;
 	while (i < c)
 	{
 		if ((fd = open(files[i], O_RDONLY)) == -1)
@@ -93,4 +92,12 @@ void	show_all_files(int c, char **files)
 		g_print_filepos(g_file_pos);
 		ft_putstr("\n");
 	}
+}
+
+void	show_stdin(void)
+{
+	show_file(0);
+	ft_print_memory(g_buffer, g_buffer_bytes_read);
+	g_print_filepos(g_file_pos);
+	ft_putstr("\n");
 }

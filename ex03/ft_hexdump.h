@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 04:33:18 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/16 21:39:44 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/16 22:14:14 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,8 @@
 ** Open, show and discard file descriptors
 */
 
-int				get_fd(const char *filename);
-int				discard_fd(int fd);
-void			show_header(const char *filename, int print_newline);
-int				show_fd(int fd);
-void			flush_buffer(char *buffer, size_t s);
 void			show_all_files(int c, char **files);
+void			show_stdin(void);
 
 void			edu_print_filepos_c(size_t fp);
 void			print_file_line_c(char *addr, size_t to_print);
@@ -57,7 +53,6 @@ char			*ft_strcpy(char *dest, const char *src);
 ** Buffer operations
 */
 
-void			tail_buffer(char *buf1, size_t bs1, char *buf2, size_t bs2);
 void			buffer_offset(char *buf, size_t bs1, size_t offset);
 void			buffer_copy(char *buf1, char *buf2, size_t s);
 int				buffer_eq(char *buf1, char *buf2, size_t s);
