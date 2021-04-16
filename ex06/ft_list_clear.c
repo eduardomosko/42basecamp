@@ -6,11 +6,12 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 19:48:55 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/14 19:54:35 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/16 05:01:35 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "ft_list.h"
 
 void	ft_list_clear(t_list *begin_list, void (*free_fct)(void*))
 {

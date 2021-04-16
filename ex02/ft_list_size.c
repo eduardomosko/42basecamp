@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/14 19:33:30 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/14 19:35:16 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/16 03:59:38 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@ int	ft_list_size(t_list *begin_list)
 {
 	int i;
 
-	if (begin_list == NULL)
-		return (-1);
 	i = 0;
-	while (begin_list->next != NULL)
+	while (begin_list != 0)
 	{
 		begin_list = begin_list->next;
 		++i;
