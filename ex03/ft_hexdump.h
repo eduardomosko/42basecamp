@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 04:33:18 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/16 21:02:44 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/16 21:39:44 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void			print_file_line_c(char *addr, size_t to_print);
 
 void			edu_print_filepos_default(size_t fp);
 void			print_file_line_default(char *addr, size_t to_print);
+
+void			edu_print_byte_hex(char c);
 
 /*
 ** Shows adequate error messages
@@ -65,5 +67,8 @@ int				buffer_eq(char *buf1, char *buf2, size_t s);
 */
 
 void			parse_args(int c, char **args);
+
+extern void		(*g_print_line)(char*, size_t);
+extern void		(*g_print_filepos)(size_t);
 
 #endif
