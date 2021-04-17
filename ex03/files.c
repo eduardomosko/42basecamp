@@ -6,7 +6,7 @@
 /*   By: emendes- <emendes-@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/13 04:32:40 by emendes-          #+#    #+#             */
-/*   Updated: 2021/04/16 22:13:20 by emendes-         ###   ########.fr       */
+/*   Updated: 2021/04/17 00:30:20 by emendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char			g_buffer1[16];
 int				g_file_pos = 0;
 int				g_is_repeating = 0;
 int				g_buffer_bytes_read = 0;
+int				g_shown_anything = 0;
 
 void	ft_print_memory(void *addr, unsigned int size)
 {
@@ -28,6 +29,7 @@ void	ft_print_memory(void *addr, unsigned int size)
 	unsigned int	to_print;
 
 	printed = 0;
+	g_shown_anything = g_shown_anything || (size != 0);
 	while (printed < size)
 	{
 		to_print = size - printed > 16 ? 16 : size - printed;
@@ -68,12 +70,10 @@ void	show_file(int fd)
 
 void	show_all_files(int c, char **files)
 {
-	int			shown_any;
 	int			fd;
 	int			i;
 
 	i = 0;
-	shown_any = 0;
 	while (i < c)
 	{
 		if ((fd = open(files[i], O_RDONLY)) == -1)
@@ -82,14 +82,14 @@ void	show_all_files(int c, char **files)
 			continue ;
 		}
 		show_file(fd);
-		shown_any = 1;
 		close(fd);
 		++i;
 	}
-	if (shown_any)
+	if (g_shown_anything)
 	{
 		ft_print_memory(g_buffer, g_buffer_bytes_read);
-		g_print_filepos(g_file_pos);
+		if (g_shown_anything)
+			g_print_filepos(g_file_pos);
 		ft_putstr("\n");
 	}
 }
@@ -98,6 +98,7 @@ void	show_stdin(void)
 {
 	show_file(0);
 	ft_print_memory(g_buffer, g_buffer_bytes_read);
-	g_print_filepos(g_file_pos);
+	if (g_shown_anything)
+		g_print_filepos(g_file_pos);
 	ft_putstr("\n");
 }
